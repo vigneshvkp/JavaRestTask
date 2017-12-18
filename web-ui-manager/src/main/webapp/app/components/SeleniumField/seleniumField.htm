@@ -1,0 +1,136 @@
+<div class="main_content">
+	<div class="main_head main_head_spacing bottom_spacing">
+		<div class="row">
+			<h2>Selenium Field</h2>
+
+			<div role="tabpanel" class="tab-section">
+				<div>
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="">Manage Fields</a></li>
+					</ul>
+				</div>
+			</div>
+			<br>
+		</div>
+		
+		<div
+			class="Details_check panel panel-default gutter-top-30 routines_check ">
+			<div class="panel-body">
+				<span>{{ seleniumFieldVM.selectedField.fieldLabel | uppercase}}</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="panel panel-default schedule-panel gutter-top-20">
+				<div class="panel-heading">
+					<h4>
+						<span>Edit Properties for Selenium Field:</span>
+					</h4>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="form-group">
+							<label>Field ID:</label>
+							<div class="row">
+								<div class="col-md-12">
+									<input type="text" class="form-control"
+										ng-model="seleniumFieldVM.selectedField.id" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row gutter-top-10">
+						<div class="form-group">
+							<label>Field Path:</label>
+							<div class="row">
+								<div class="col-md-12">
+									<input type="text" class="form-control"
+										ng-model="seleniumFieldVM.selectedField.path" disabled>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row gutter-top-10">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label>Field Type:</label>
+								<div class="row">
+									<div class="col-md-12">
+										<input type="text" class="form-control"
+											ng-model="seleniumFieldVM.selectedField.type"
+											ng-change="seleniumFieldVM.valueChanged()">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<div class="input-groups unique gutter-top-30">
+								<div class="checkbox">
+									<custom-check-box
+										is-checked="fieldsVM.selectedField.hide"
+										bundle-name="manageFields" label="hide"
+										ng-model="fieldsVM.selectedField.hide"
+										ng-change="seleniumFieldVM.valueChanged()"> </custom-check-box>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row gutter-top-10">
+						<div class="col-md-9">
+							<div class="form-group">
+								<label>Field Label:</label>
+								<div class="row">
+									<div class="col-md-12">
+										<input type="text" class="form-control"
+											ng-model="seleniumFieldVM.selectedField.fieldLabel"
+											ng-change="seleniumFieldVM.valueChanged()">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-2">
+							<div class="input-groups unique gutter-top-30">
+								<div class="checkbox">
+									<custom-check-box
+										is-checked="fieldsVM.selectedField.isClicked"
+										bundle-name="manageFields" label="isClicked"
+										ng-model="fieldsVM.selectedField.isClicked"
+										ng-change="seleniumFieldVM.valueChanged()"> </custom-check-box>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-12">
+			<div class="row">
+				<br>
+				<br>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="footer_buttn">
+	<!-- footerPart -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-3"></div>
+			<div class="col-xs-8 col-md-6 text-left">
+				<button type="button" class="btn footer_btn" title="Exit"
+					ng-click="seleniumFieldVM.exit()">
+					<span>Exit</span>
+				</button>
+				<button type="button" class="btn footer_btn" title="Save"
+					ng-click="seleniumFieldVM.saveChanges()"
+					ng-disabled="!seleniumFieldVM.isValueChanged">
+					<span>Save</span>
+				</button>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</div>

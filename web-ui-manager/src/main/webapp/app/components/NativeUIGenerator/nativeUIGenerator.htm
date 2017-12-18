@@ -1,0 +1,545 @@
+<div ng-controller="nativeUIGeneratorController as nativeUIGeneratorVM">
+	<div class="main_content">
+		<!-- Modal -->
+		<div class="modal fade" id="edgeXMLModal" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h1 class="modal-title">Publish XML to Edge Server</h1>
+					</div>
+					<div class="modal-body">
+						<br>
+						<br>
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="uri1">Uri1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="uri1"
+										value="sftp://ald-edgesrv:22" name="#uri1"
+										ng-model="nativeUIGeneratorVM.uri1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="username1">Username1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="username1"
+										value="ftpUser" name="username1"
+										ng-model="nativeUIGeneratorVM.username1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="password1">Password1:</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" id="password1"
+										value="S3cur3P@ssw0rd123" name="password1"
+										ng-model="nativeUIGeneratorVM.password1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="privateKeyPath1">PrivateKeyPath1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="privateKeyPath1"
+										name="privateKeyPath1"
+										ng-model="nativeUIGeneratorVM.privateKeyPath1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="passphrase1">Passphrase1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="passphrase1"
+										name="passphrase1" ng-model="nativeUIGeneratorVM.passphrase1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="knownHostsPath1">KnownHostsPath1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="knownHostsPath1"
+										value="ftpUser" name="knownHostsPath1"
+										ng-model="nativeUIGeneratorVM.knownHostsPath1">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-sm-2" for="dir1">Dir1:</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" id="dir1"
+										value="C:/WebServers/TomCat/apache-tomcat-9.0.0.M17/webapps/EngagementCentreV9/XML"
+										name="dir1" ng-model="nativeUIGeneratorVM.dir1">
+								</div>
+							</div>
+						</form>
+						<br>
+					</div>
+					<div class="modal-footer">
+						<div style="margin-right: 6%">
+							<button type="submit" class="btn btn-success"
+								ng-click="nativeUIGeneratorVM.panelSubmitClicked()">Upload</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					<div class="row">
+						<!-- <div class="loader" ng-hide="nativeUIGeneratorVM.PanelLoaderFlag"></div> -->
+						<div id="preloader-container" ng-hide="nativeUIGeneratorVM.PanelLoaderFlag">
+							<div class="pre-loader"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="main_head main_head_spacing bottom_spacing">
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<h2 class="multi_line_text_table_800"
+						style="display: inline-block;">
+						<span title="Generate XML" class="ng-binding">Generate XML</span>
+					</h2>
+				</div>
+			</div>
+			<div role="tabpanel" class="tab-section">
+				<div>
+					<ul class="nav nav-tabs">
+						<li ng-class="{ active: nativeUIGeneratorVM.isSet(1) } " ><a
+							href="" ng-click="nativeUIGeneratorVM.setTab(1)">NATIVE UI
+								XML</a></li>
+						<li ng-class="{ active: nativeUIGeneratorVM.isSet(2) }" ><a
+							ng-click="nativeUIGeneratorVM.setTab(2)">
+							WEB UI XML</a></li>
+						<li ng-class="{ active: nativeUIGeneratorVM.isSet(3) }" ><a
+							ng-click="nativeUIGeneratorVM.setTab(3)">
+							SELENIUM XML</a></li>
+					</ul>
+				</div>
+			</div>
+			<br>
+			<div class="flagToCheck" ng-if="nativeUIGeneratorVM.loadNativeUI">
+				<div
+					class="Details_check panel panel-default gutter-top-30 routines_check ">
+					<div class="panel-body">
+						<span>NATIVE UI XML</span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default schedule-panel gutter-top-20"
+						style="min-height: 320px;">
+						<div class="panel-heading">
+							<h4>
+								<span>Generate Native UI XML - Configuration Properties</span>
+							</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="col-md-11 gutter-top-10">
+										<div class="input-groups">
+											<label>Select Product Folder</label> <input id=""
+												class="form-control" title="" text=""
+												value="C:/DynamicGeneration/SelectProductXML/Sales"
+												ng-model="nativeUIGeneratorVM.selectProductFolder">
+										</div>
+									</div>
+									<div class="col-md-11 gutter-top-20">
+										<div class="input-groups">
+											<label><span>Edge Product Folder</span></label> <input id=""
+												class="form-control" title="" text=""
+												value="C:/DynamicGeneration/SelectProductXML/Sales/Edge"
+												ng-model="nativeUIGeneratorVM.edgeProductFolder">
+										</div>
+									</div>
+									<div class="col-md-11 gutter-top-20">
+										<div class="input-groups">
+											<label><span>Boolean Style</span></label> <input id=""
+												class="form-control" title=""
+												value="Radio"
+												ng-model="nativeUIGeneratorVM.booleanStyle">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2"></div>
+								<div class="col-md-3"><br>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.useNativeUIScreens"
+													is-checked="nativeUIGeneratorVM.useNativeUIScreens"
+													bundle-name="manageProducts" label="useNativeUIScreens">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.useCoverageSelector"
+													is-checked="nativeUIGeneratorVM.useCoverageSelector"
+													bundle-name="manageProducts" label="useCoverageSelector">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.usePricePresentation"
+													is-checked="nativeUIGeneratorVM.usePricePresentation"
+													bundle-name="manageProducts" label="usePricePresentation">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.useIgnoreWarningMethod"
+													is-checked="nativeUIGeneratorVM.useIgnoreWarningMethod"
+													bundle-name="manageProducts" label="useIgnoreWarningMethod">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3"><br>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.generateDynamicUI"
+													is-checked="nativeUIGeneratorVM.generateDynamicUI"
+													bundle-name="manageProducts" label="generateDynamicUI">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.generateDynamicServices"
+													is-checked="nativeUIGeneratorVM.generateDynamicServices"
+													bundle-name="manageProducts"
+													label="generateDynamicServices"> </custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.oneScreenPerComponent"
+													is-checked="nativeUIGeneratorVM.oneScreenPerComponent"
+													bundle-name="manageProducts"
+													label="generateOneComponentPerScreen"> </custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.skipOptionalComponents"
+													is-checked="nativeUIGeneratorVM.skipOptionalComponents"
+													bundle-name="manageProducts" label="skipOptionalComponents">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><br><br><hr>
+							<div class="row" style="margin-bottom:1%;">
+								<div class="col-md-3"></div>
+								<div class="col-md-6 col-xs-12">
+									<!--  <div class="loader" ng-show="nativeUIGeneratorVM.loaderFlag"></div> -->
+									<div id="preloader-container" ng-show="nativeUIGeneratorVM.loaderFlag">
+										<div class="pre-loader"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="flagToCheck" ng-if="nativeUIGeneratorVM.loadWebUI">
+				<div
+					class="Details_check panel panel-default gutter-top-30 routines_check ">
+					<div class="panel-body">
+						<span>WEB UI XML</span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default schedule-panel gutter-top-20"
+						style="min-height: 320px;">
+						<div class="panel-heading">
+							<h4>
+								<span>Generate WEB UI XML - Configuration Properties</span>
+							</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="col-md-11 gutter-top-10">
+										<div class="input-groups">
+											<label>Select Product Folder</label> <input id=""
+												class="form-control" title="" text=""
+												value="C:/DynamicGeneration/SelectProductXML/Sales"
+												ng-model="nativeUIGeneratorVM.selectProductFolder">
+										</div>
+									</div>
+									<div class="col-md-11 gutter-top-20">
+										<div class="input-groups">
+											<label><span>Edge Product Folder</span></label> <input id=""
+												class="form-control" title="" text=""
+												value="C:/DynamicGeneration/SelectProductXML/Sales/Edge"
+												ng-model="nativeUIGeneratorVM.edgeProductFolder">
+										</div>
+									</div>
+									<div class="col-md-11 gutter-top-20">
+										<div class="input-groups">
+											<label><span>Boolean Style</span></label> <input id=""
+												class="form-control" title=""
+												value="Radio"
+												ng-model="nativeUIGeneratorVM.booleanStyle">
+										</div>
+									</div>
+								</div>
+								<div class="col-md-2"></div>
+								<div class="col-md-3"><br>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.useNativeUIScreens"
+													is-checked="nativeUIGeneratorVM.useNativeUIScreens"
+													bundle-name="manageProducts" label="useNativeUIScreens">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.useCoverageSelector"
+													is-checked="nativeUIGeneratorVM.useCoverageSelector"
+													bundle-name="manageProducts" label="useCoverageSelector">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.usePricePresentation"
+													is-checked="nativeUIGeneratorVM.usePricePresentation"
+													bundle-name="manageProducts" label="usePricePresentation">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.useIgnoreWarningMethod"
+													is-checked="nativeUIGeneratorVM.useIgnoreWarningMethod"
+													bundle-name="manageProducts" label="useIgnoreWarningMethod">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-3"><br>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.generateDynamicUI"
+													is-checked="nativeUIGeneratorVM.generateDynamicUI"
+													bundle-name="manageProducts" label="generateDynamicUI">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.generateDynamicServices"
+													is-checked="nativeUIGeneratorVM.generateDynamicServices"
+													bundle-name="manageProducts"
+													label="generateDynamicServices"> </custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.oneScreenPerComponent"
+													is-checked="nativeUIGeneratorVM.oneScreenPerComponent"
+													bundle-name="manageProducts"
+													label="generateOneComponentPerScreen">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12 ng-scope">
+										<div class="input-groups unique">
+											<div class="checkbox">
+												<custom-check-box
+													ng-model="nativeUIGeneratorVM.skipOptionalComponents"
+													is-checked="nativeUIGeneratorVM.skipOptionalComponents"
+													bundle-name="manageProducts" label="skipOptionalComponents">
+												</custom-check-box>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><br><br><hr>
+							<div class="row" style="margin-bottom:1%;">
+								<div class="col-md-6 col-xs-12">
+									<!-- <div class="loader" ng-show="nativeUIGeneratorVM.loaderFlag"></div>  -->
+									<div id="preloader-container" ng-show="nativeUIGeneratorVM.loaderFlag">
+										<div class="pre-loader"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flagToCheck" ng-if="nativeUIGeneratorVM.loadSeleniumUI">
+				
+				<div
+					class="Details_check panel panel-default gutter-top-30 routines_check ">
+					<div class="panel-body">
+						<span>SELENIUM XML</span>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="panel panel-default schedule-panel gutter-top-20"
+						style="min-height: 320px;">
+						<div class="panel-heading">
+							<h4>
+								<span>SELENIUM XML - Configuration Properties</span>
+							</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="col-md-11 gutter-top-10">
+										<div class="input-groups">
+											<label>Selenium Environment</label> <input id=""
+												class="form-control" title="" text=""
+												value="Sales"
+												ng-model="nativeUIGeneratorVM.seleniumEnvironment">
+										</div>
+									</div>
+									<div class="col-md-11 gutter-top-20">
+										<div class="input-groups">
+											<label><span>Selenium Transactions</span></label> <input id=""
+												class="form-control" title="" text=""
+												value="NBQT:MTA"
+												ng-model="nativeUIGeneratorVM.seleniumTransactions">
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-md-6">
+									<div class="col-md-11 gutter-top-10">
+										<div class="input-groups">
+											<label>Selenium Scripts Input Folder</label> <input id=""
+												class="form-control" title="" text=""
+												value="C:/DynamicGeneration/JavaWorkspace/xml-generator/Selenium"
+												ng-model="nativeUIGeneratorVM.seleniumScriptsInputFolder">
+										</div>
+									</div>
+									<div class="col-md-11 gutter-top-20">
+										<div class="input-groups">
+											<label><span>Selenium Scripts Output Folder</span></label> <input id=""
+												class="form-control" title="" text=""
+												value="C:/DynamicGeneration/SelectProductXML/Sales/Edge"
+												ng-model="nativeUIGeneratorVM.seleniumScriptsOutputFolder">
+										</div>
+									</div>
+								</div>
+								
+							</div><br><br><hr>
+							<div class="row" style="margin-bottom:1%;">
+								<div class="col-md-6 col-xs-12">
+									<!-- <div class="loader" ng-show="nativeUIGeneratorVM.loaderFlag"></div>  -->
+									<div id="preloader-container" ng-show="nativeUIGeneratorVM.loaderFlag">
+										<div class="pre-loader"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer_buttn">
+	
+		<!-- footerPart for Web UI-->
+		<div class="container" ng-if="nativeUIGeneratorVM.loadWebUI">
+			<div class="row">
+				<div class="col-md-3 col-sm-3"></div>
+				<div class="col-md-6 col-xs-8 text-left">
+					<button type="button" class="btn footer_btn" title="Exit"
+						ng-click="nativeUIGeneratorVM.exit()">
+						<span>Exit</span>
+					</button>
+					<button type="button" class="btn footer_btn" title="Generate Edge XML" data-toggle="modal"
+							data-target="#edgeXMLModal" ng-click="nativeUIGeneratorVM.openPanel()">
+						<span>Publish XML to Edge Server</span>
+					</button>
+					<button type="button" class="btn footer_btn" title="Generate Web UI XML"
+						ng-click="nativeUIGeneratorVM.nativeSubmitClicked('GenerationFromMetaDataRefactored')">
+						<span>GENERATE WEB UI XML</span>
+					</button>
+				</div>
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+		
+		<div class="container" ng-if="nativeUIGeneratorVM.loadNativeUI">
+			<div class="row">
+				<div class="col-md-4 col-sm-4"></div>
+				<div class="col-md-4 col-xs-8 text-left">
+					<button type="button" class="btn footer_btn" title="Exit"
+						ng-click="nativeUIGeneratorVM.exit()">
+						<span>Exit</span>
+					</button>
+					<button type="button" class="btn footer_btn" title="GENERATE NATIVE UI XML"
+						ng-click="nativeUIGeneratorVM.nativeSubmitClicked('GenerationFromMetaData')">
+						<span>GENERATE NATIVE UI XML</span>
+					</button>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+		
+		<div class="container" ng-if="nativeUIGeneratorVM.loadSeleniumUI">
+			<div class="row">
+				<div class="col-md-4 col-sm-4"></div>
+				<div class="col-md-4 col-xs-8 text-left">
+					<button type="button" class="btn footer_btn" title="Exit"
+						ng-click="nativeUIGeneratorVM.exit()">
+						<span>Exit</span>
+					</button>
+					<button type="button" class="btn footer_btn" title="GENERATE SELENIUM UI XML"
+						ng-click="nativeUIGeneratorVM.seleniumSubmitClicked()">
+						<span>GENERATE SELENIUM XML</span>
+					</button>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</div>
+	</div>

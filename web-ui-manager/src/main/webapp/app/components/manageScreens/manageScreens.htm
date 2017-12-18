@@ -1,0 +1,334 @@
+<main role="main">
+	<!-- Modal -->
+	<div class="modal fade" id="prePhaseRuleModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h1 class="modal-title">
+						<span ng-show="manageScreensVM.isRuleAddMode">Add</span><span ng-hide="manageScreensVM.isRuleAddMode">Edit</span> PrePhase rule</h1>
+				</div>
+				<div class="modal-body">
+					<br><br>
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="uri1">Rule</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" id="rule" rows="4" cols="4" name="name" ng-model="manageScreensVM.prePhaseRulesObj.rule"></textarea>
+							</div>
+						</div>
+					</form>
+					<br>
+				</div>
+				<div class="modal-footer">
+					<div style="margin-right: 6%">
+						<button type="submit" class="btn btn-success" data-dismiss="modal" ng-show="manageScreensVM.isRuleAddMode"
+							ng-click="manageScreensVM.addPrePhaseRule()">Add</button>
+						<button type="submit" class="btn btn-success" data-dismiss="modal" ng-hide="manageScreensVM.isRuleAddMode"
+							ng-click="manageScreensVM.addPrePhaseRule()">Update</button>
+						<button type="button" class="btn btn-default"
+							data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		<!-- Modal -->
+	<div class="modal fade" id="panelModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h1 class="modal-title">Edit Panel</h1>
+				</div>
+				<div class="modal-body">
+					<br><br>
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="title">Title</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="visibilityCondition" ng-model="manageScreensVM.panelObj.title">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="mode">Visibility Mode</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="visibilityMode" ng-model="manageScreensVM.panelObj.visibilityMode">
+							</div>
+						</div>
+						<div class="form-group">
+								<div class="checkbox">
+									<custom-check-box ng-model="manageScreensVM.prePhaseRulesObj.visibilityCondition"
+										is-checked="manageScreensVM.prePhaseRulesObj.visibilityCondition" bundle-name="manageProducts" label="visibility_condition_label">
+									</custom-check-box>
+								</div>
+<!-- 							<div class="col-sm-9">
+								<input type="text" class="form-control" id="visibilityCondition" ng-model="manageScreensVM.prePhaseRulesObj.visibilityCondition">
+							</div> -->
+						</div>
+					</form>
+					<br>
+				</div>
+				<div class="modal-footer">
+					<div style="margin-right: 6%">
+						<button type="submit" class="btn btn-success" data-dismiss="modal"
+							ng-click="manageScreensVM.updatePanel()">Update</button>
+						<button type="button" class="btn btn-default"
+							data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="main_content products_page bottom_spacing" ng-init="manageScreensVM.getScreen()">
+	 	<div class="row search_box_filter"></div>
+	    <div class="main_head gutter-top-10 bottom_spacing">
+    		<div class="row">
+			<div class="col-md-6 col-xs-8">
+				<h3> <span>Manage Screens</span></h3>
+			</div>
+		</div>
+		<hr>
+		<div class="panel panel-default gutter-top-30">
+				<div class="panel-body zero_spacing">
+				    <div class="panel-heading border-none">
+				    	<div class="row">
+	                     <div class="col-xs-12">
+	                           <div class="col-md-12" style="display: block;">
+	                              <h3>
+	                               	<span>Pre Phase rules</span>
+	                              </h3>
+	                              <button type="button" class="btn btn_tree gutter-top-minus-25"
+	                                 style="float: right; height: 40px; margin-right: 10px; margin-bottom: 15px;" title="Actions">
+	                              <span>Actions</span>
+	                              </button>
+	                           </div>
+	                           <!-- <div class="col-md-8 gutter-top-15">  -->
+	                           <div class="tree_edit_options bottom-zero text-right animated flipInX"
+	                              style="display: none;">
+	                              <h3 class="flip_h3_text">
+	                                	<span>Pre Phase rules</span>
+	                              </h3>
+	                              <div class="close gutter-top-minus-40">
+	                                 <i class="close_icon" title="Close"></i>
+	                              </div>
+									<button type="button" class="btn property-btn" title="Add Prephase Rule" data-toggle="modal"
+											data-target="#prePhaseRuleModal" ng-click="manageScreensVM.addRule()"
+											data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'add_tool_tip'}}">
+										<span data-i18n-text="{bundle: 'common', key: 'add_button_label'}"></span>
+									</button>
+	                            </div>
+	                     </div>
+	                  </div>
+					</div>
+					<div class="screen-definition-table" ng-if="manageScreensVM.showDT">
+						<table datatable="ng" class="table table-condensed hover table-striped dataTable"
+							dt-options="manageScreensVM.dtOptions"
+							dt-column-defs="manageScreensVM.dtColumnDefs">
+							<tbody>
+								<tr style="height: 65px;" ng-repeat="prePhaseRule in manageScreensVM.screenObject.PrePhaseRules track by $index" ng-init="prePhaseRule.hide = false"
+								ng-class="{'slideOutLeft':prePhaseRule.hide,'animated':prePhaseRule.hide}">
+									<td ng-if="!prePhaseRule.hide" class="multi_line_text_table" title="{{prePhaseRule.rule}}" ng-bind="prePhaseRule.rule"></td>
+									<td ng-if="!prePhaseRule.hide"></td>
+									<td ng-if="!prePhaseRule.hide"></td>
+									<td ng-if="!prePhaseRule.hide" class="text-right view_1"><span ng-show="prePhaseRule.rule">
+										<i data-i18n-tool-tip="{'title' :{bundle: 'common', key: 'animate_action'}}"
+										ng-click="manageScreensVM.flipOtherRuleRows($index, prePhaseRule)"
+										class="arrowright_icon"></i></span>
+									</td>
+									<td class="select-conventer overlay-row-sd multi_line_text_table"
+										ng-if="prePhaseRule.hide" ng-bind="prePhaseRule.rule">
+									</td>
+									<td class="select-conventer overlay-row-sd btn-nowrap" ng-if="prePhaseRule.hide">
+										<button type="button" class="btn property-btn" data-toggle="modal" data-target="#prePhaseRuleModal"
+										 	ng-click="manageScreensVM.editPrePhaseRule(prePhaseRule, $index)" data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'edit_tool_tip'}}" >
+											<i class="edit_icon"></i><span data-i18n-text="{bundle: 'common', key: 'edit_button_label'}"></span>
+										</button>
+									</td>
+									<td class="select-conventer overlay-row-sd btn-nowrap" ng-if="prePhaseRule.hide" style="padding-right: 0px !important;">
+										<button type="button" class="btn property-btn" ng-click="manageScreensVM.deletePrePhaseRule($index)" data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'delete_tool_tip'}}" >
+											<i class="fa fa-trash-o delete-button-size"></i><span data-i18n-text="{bundle: 'common', key: 'delete_button_label'}"></span>
+										</button>
+									</td>
+									<td class="select-conventer text-right view_1 overlay-row-sd" ng-if="prePhaseRule.hide">
+										<i class="close_icon" ng-click="manageScreensVM.closeAction($index)"
+											data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'close_button_label'}}"></i>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default gutter-top-30" ng-if="panel.id" ng-init="$last && manageScreensVM.initSetOrder()" 
+			ng-repeat="panel in manageScreensVM.screenObject.Panel track by $index">
+				<div class="panel-body zero_spacing" >
+				    <div class="panel-heading border-none">
+						<div class="row">
+	                     <div class="col-xs-12">
+	                        <div class="versions-content">
+	                           <div class="col-md-12" style="display: block;">
+	                           <span class="nav-toggle-icon glyphicon tree_right_icon icon-float" ng-click="manageScreensVM.toggleAction($index, $event)"></span>
+	                              <h3 style="float:left;">
+	                                <span ng-if="panel.Heading.headerText" ng-bind="panel.Heading.headerText"></span>
+									<span ng-if="!panel.Heading.headerText">Panel {{$index}}</span>
+									<span class="business_description gutter-top-5"
+                                   		style="vertical-align: middle">{{ panel.id }}</span>
+	                              </h3>
+	                              <button type="button" class="btn btn_tree gutter-top-10"
+	                                 style="float: right; height: 40px; margin-right: 10px; margin-bottom: 15px;" title="Actions">
+	                              <span>Actions</span>
+	                              </button>
+	                           </div>
+	                           <!-- <div class="col-md-8 gutter-top-15">  -->
+	                           <div class="tree_edit_options bottom-zero text-right animated flipInX"
+	                              style="display: none;">
+	                              <h3 class="flip_h3_text">
+	                                 <span ng-if="panel.Heading.headerText" ng-bind="panel.Heading.headerText"></span>
+									<span ng-if="!panel.Heading.headerText">Panel {{$index}}</span>
+	                              </h3>
+	                              <div class="close gutter-top-minus-40">
+	                                 <i class="close_icon" title="Close"></i>
+	                              </div>
+	                             <button type="button" class="btn property-btn" title="Edit Panel" data-toggle="modal"
+										data-target="#panelModal" ng-click="manageScreensVM.editPanel(panel)"
+										data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'edit_tool_tip'}}">
+	                              		<i class="edit_icon"></i> <span data-i18n-text="{bundle: 'common', key: 'edit_button_label'}"></span>
+	                              </button>
+	                              <button type="button" class="btn property-btn" title="Delete Panel" ng-click="manageScreensVM.deletePanel(panel)"
+										data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'delete_tool_tip'}}">
+											<i class="fa fa-trash-o delete-button-size"></i> <span data-i18n-text="{bundle: 'common', key: 'delete_button_label'}"></span>
+								  </button>
+	                            </div>
+	                        </div>
+	                     </div>
+	                  </div>
+					</div>
+					<div class="screen-tab-order" ng-show="manageScreensVM.showTable[$index]">
+						<div class="configure row titlebar-table">
+							<div class="configure-heading col-md-4 align-left left-40 col1">Field name</div>
+							<div class="configure-heading col-md-2 align-left col2">Is Mandatory</div>
+							<div class="configure-heading col-md-2 align-left left-40 col2">Widget</div>
+							<div class="configure-heading col-md-2 align-left left-40 col2">Default</div>
+							<div class="configure-heading col-md-2 align-right col2">Action</div>
+						</div>
+ 				       <div id="scrollbar{{$index}}" class="scrollbar-overflow">
+				           <div class="viewport">
+				                <div class="overview" style="top: 0px;">	
+									<div class="row-list ui-sortable sortable-icon" id="sortable{{$index}}">	
+										<div class="row configure-row ui-sortable-handle" ng-class="{'slideOutLeft':field.hide,'animated':field.hide}"
+										 ng-repeat="field in panel.PanelElements track by $index" ng-init="field.hide = false;">
+											<div class="configure-data col-md-4 align-left gutter-top-10" ng-if="!field.hide">
+												<span class="gutter-8 sub-text">{{field.fieldLabel}} {{field.text}}</span>
+											</div>
+											<div class="configure-data col-md-2 align-left gutter-top-10" ng-if="!field.hide">
+												<span class="gutter-8 sub-text">{{field.isMandatory}}</span>
+											</div>
+											<div class="configure-data col-md-2 align-left gutter-top-10" ng-if="!field.hide">
+												<span class="gutter-8 sub-text">{{field.widget}}</span>
+											</div>
+											<div class="configure-data col-md-2 align-left gutter-top-10" ng-if="!field.hide">
+												<span class="gutter-8 sub-text">{{field.defaultValue}}</span>
+											</div>
+											<div class="configure-data configure-data-button col-md-2 align-right gutter-top-10" ng-if="!field.hide" class="text-right"><span><i data-i18n-tool-tip="{'title' :{bundle: 'common', key: 'animate_action'}}"
+												ng-click="manageScreensVM.flipOtherRows($index, panel)"
+												class="arrowright_icon"></i></span>
+											</div>
+											
+											<div class="select-converter col-md-4 align-left configure-data overlay-row-sd"
+												ng-if="field.hide" ng-bind="field.fieldLabel">
+											</div>
+											<div class="col-md-3 configure-data overlay-row-sd btn-nowrap" ng-if="field.hide">
+												<button type="button" class="btn property-btn" ng-click="manageScreensVM.editField(field, panel)" data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'edit_tool_tip'}}" >
+													<i class="edit_icon"></i><span data-i18n-text="{bundle: 'common', key: 'edit_button_label'}"></span>
+												</button>
+											</div>
+											<div class="col-md-3 configure-data overlay-row-sd btn-nowrap" ng-if="field.hide" style="padding-right: 0px !important;">
+												<button type="button" class="btn property-btn" ng-click="manageScreensVM.deleteField(panel, field, $index)" data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'delete_tool_tip'}}" >
+													<i class="fa fa-trash-o delete-button-size"></i><span data-i18n-text="{bundle: 'common', key: 'delete_button_label'}"></span>
+												</button>
+											</div>
+											<div class="col-md-2 align-right configure-data text-right overlay-row-sd" ng-if="field.hide">
+												<i class="close_icon" ng-click="manageScreensVM.closeAction($index, panel)"
+													data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'close_button_label'}}"></i>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>	
+						</div>
+					</div>
+				</div>
+	    	</div>
+	    </div>
+   	</div>
+</main>
+<div class="footer_buttn">
+	<!-- footerPart -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-3"></div>
+			<div class="col-xs-8 col-md-6 text-left">
+				<button type="button" class="btn footer_btn" title="Exit"
+					ng-click="manageScreensVM.exit()">
+					<span>Exit</span>
+				</button>
+				<button type="button" class="btn footer_btn" title="Save"
+					ng-click="manageScreensVM.saveChanges()">
+					<span>Save</span>
+				</button>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</div>
+<!--<div class="screen-definition-table" ng-if="manageScreensVM.showDT">
+	<table datatable="ng" class="table table-condensed hover table-striped dataTable"
+		dt-options="manageScreensVM.fieldDtOptions" dt-instance ="manageScreensVM.dtInstance"
+		dt-column-defs="manageScreensVM.fieldDtColumnDefs">
+		<thead class="custom-table-header">
+			<tr>
+				<th class="no-sort"><span>Field name</span></th>
+				<th class="no-sort"><span>Is Mandatory</span></th>
+				<th class="no-sort"><span>Widget</span></th>
+				<th class="no-sort"><span>Default Value</span></th>
+				<th class="sb-width-col5 align-right"><span>Action</span></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr style="height: 65px;" ng-repeat="field in panel.PanelElements track by $index" ng-init="field.hide = false;manageScreensVM.fieldIndex = $index"
+				ng-class="{'slideOutLeft':field.hide,'animated':field.hide}">
+				<td ng-if="!field.hide" class="multi_line_text_table" title="{{field.Field._fieldLabel}}">{{field.Field._fieldLabel}} {{field.FreeText._text}}</td>
+				<td ng-if="!field.hide" ng-bind="field.Field._isMandatory"></td>
+				<td ng-if="!field.hide" ng-bind="field.Field._widget"></td>
+				<td ng-if="!field.hide" ng-bind="field.Field._defaultValue">
+				</td>
+				<td ng-if="!field.hide" class="text-right view_1"><span ng-show="field.Field.fieldLabel">
+					<i data-i18n-tool-tip="{'title' :{bundle: 'common', key: 'animate_action'}}"
+					ng-click="manageScreensVM.flipOtherRows($index, panel)"
+					class="arrowright_icon"></i></span>
+				</td>
+				
+				<td class="select-conventer overlay-row-sd"
+					ng-if="field.hide" ng-bind="field.fieldLabel">
+				</td>
+				<td class="select-conventer overlay-row-sd btn-nowrap" ng-if="field.hide">
+					<button type="button" class="btn property-btn" ng-click="manageScreensVM.editField(field, panel)" data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'edit_tool_tip'}}" >
+						<span data-i18n-text="{bundle: 'common', key: 'edit_button_label'}"></span>
+					</button>
+				</td>
+				<td class="select-conventer overlay-row-sd btn-nowrap" ng-if="field.hide" style="padding-right: 0px !important;">
+					<button type="button" class="btn property-btn" ng-click="manageScreensVM.deleteField(panel, $index)" data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'delete_tool_tip'}}" >
+						<span data-i18n-text="{bundle: 'common', key: 'delete_button_label'}"></span>
+					</button>
+				</td>
+				<td class="select-conventer text-right view_1 overlay-row-sd" ng-if="field.hide"></td>
+				<td class="select-conventer text-right view_1 overlay-row-sd" ng-if="field.hide">
+					<i class="close_icon" ng-click="manageScreensVM.closeAction($index, panel)"
+						data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'close_button_label'}}"></i>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>-->

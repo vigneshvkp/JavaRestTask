@@ -1,0 +1,122 @@
+<main role="main">
+    <div class="main_content products_page" ng-init="screensVM.retrieveRefactoredXml()">
+        <ng-form name="screensVM.searchForm" class="ng-pristine ng-valid ng-valid-maxlength ng-valid-required ">
+         <div class="row search_box_filter">
+            <div class="col-sm-11">
+               <div class="form-group">
+                  <div class="icon-addon addon-lg search_imd ">
+                     <custom-input-box name='screenName' place-holder-name="Search by Screen name ..." ng-model='screensVM.screenName' max-length-limit="254"></custom-input-box>
+                     <label class="glyphicon">
+                     <span class="search_icon"></span>
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="col-sm-1">
+               <div class="dropdown gutter-top-10 products_filter">
+                  <button class="btn btn-primary filter_btn_red dropdown-toggle"
+                     type="button" data-toggle="dropdown" title="Filter">
+                  <i class="filter_icon" aria-hidden="true"></i><span>Filter</span>
+                  </button>
+               </div>
+            </div>
+         </div>
+      </ng-form>
+      <div class="main_head gutter-top-10">
+         <div class="row">
+            <!-- middlePart -->
+            <div class="col-md-6 col-xs-8">
+               <!-- rightSide -->
+               <h3>
+                  <span>Screen Definition</span>
+               </h3>
+            </div>
+            <div class="col-md-6 col-xs-4 text-right gutter-top-25">
+               <!-- leftSide -->
+               <p>
+                  <span
+                     ng-bind='screensVM.screensResponse.filteredSearchResults.length'></span>
+                  <span>Result<span
+                     ng-if="screensVM.screensResponse.filteredSearchResults.length != 1">s</span></span>
+               </p>
+            </div>
+         </div>
+         <hr>
+      </div>
+      <div class="row">
+         <div class="item col-xs-12" ng-repeat="x in screensVM.screensResponse.filteredSearchResults=(screensVM.screensResponse | filter: {'id':screensVM.screenName}) track by $index">
+            <div class="thumbnail" style="padding:0px;">
+               <div class="selection_list">
+                  <div class="row">
+                     <div class="col-xs-12">
+                        <div class="versions-content">
+                           <div class="col-md-12" style="display: block;">
+                              <h3>
+                                 <span>{{ x.Heading.headerText }}</span> <span
+                                    class="business_description gutter-top-5"
+                                    style="vertical-align: middle">{{ x.id }}</span>
+                              </h3>
+                              <button type="button filter_btn_red"
+                                 class="btn btn_tree gutter-top-minus-25"
+                                 style="float: right; height: 40px; margin-right: 10px; margin-bottom: 15px;"
+                                 title="Actions">
+                              <span>Actions</span>
+                              </button>
+                           </div>
+                           <!-- <div class="col-md-8 gutter-top-15">  -->
+                           <div class="tree_edit_options bottom-zero text-right animated flipInX"
+                              style="display: none;">
+                              <h3 class="flip_h3_text" ng-hide="screensVM.isNameEditable[x.id]">
+                                 <span>{{ x.Heading.headerText }}</span>
+                              </h3>
+                              <custom-input-box ng-if="screensVM.isNameEditable[x.id]" name="name" ng-model="screensVM.screenTitle[x.id]"
+                              ng-focus="screensVM.shouldFocus.screenTitle[x.Heading.headerText]" blur-method="screensVM.updateScreenName(x.id, screensVM.screenTitle[x.id])"></custom-input-box>
+                              <div class="close gutter-top-minus-40" ng-hide="screensVM.isNameEditable[x.id]">
+                                 <i class="close_icon" title="Close"></i>
+                              </div>
+                              <button type="button" ng-hide="screensVM.isNameEditable[x.id]" class="btn btn-default" title="Edit Screen" ng-click="screensVM.editScreenName(x)">
+                              <i class="edit_icon"></i> <span>Edit</span>
+                              </button>
+                              <button type="button" ng-hide="screensVM.isNameEditable[x.id]" ui-sref="manageScreens"
+										class="btn btn-default" title="Manage Fields" ng-click="passScreenId(x)">
+										<i class="edit_icon"></i> <span>Manage</span>
+							  </button>
+                            </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="row" 
+            ng-if = "screensVM.screensResponse.filteredSearchResults.length == 0">
+            <div class="col-md-5"></div>
+            <div class="col-xs-2 no_records text-center gutter-top-25">
+               <p><span data-i18n-text="{bundle: 'common', key: 'no_records_found_label'}" /></p>
+            </div>
+            <div class="col-md-5"></div>
+         </div>
+      </div>
+     <div class="col-md-12">
+			<div class="row"><br><br></div></div>
+    </div>
+</main>
+
+<div class="footer_buttn">
+   <!-- footerPart -->
+   <div class="container">
+      <div class="row">
+         <div class="col-md-5 col-sm-3"></div>
+         <div class="col-xs-8 col-md-6 text-left">
+            <button type="button" class="btn footer_btn" title="Exit" ng-click="screensVM.exit()">
+           		<span>Exit</span>
+            </button>
+            <button type="button" class="btn footer_btn" title="Save" 
+            ng-hide="screensVM.disableSaveButton" ng-click="screensVM.saveChanges()">
+            	<span>Save</span>
+            </button>
+         </div>
+         <div class="col-md-3"></div>
+      </div>
+   </div>
+</div>

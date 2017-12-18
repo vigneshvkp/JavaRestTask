@@ -1,0 +1,268 @@
+<div class="main_content">
+	<div class="main_head main_head_spacing bottom_spacing">
+		<div class="row">
+			<h2>Fields</h2>
+
+			<div role="tabpanel" class="tab-section">
+				<div>
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="">Manage Fields</a></li>
+					</ul>
+				</div>
+			</div>
+			<br>
+		</div>
+
+		<div
+			class="Details_check panel panel-default gutter-top-30 routines_check ">
+			<div class="panel-body">
+				<span>{{ fieldsVM.selectedField.fieldLabel | uppercase}}</span>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="panel panel-default schedule-panel gutter-top-20">
+						<div class="panel-heading">
+							<h4>
+								<span>Edit Properties for Field:</span>
+							</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Field ID:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control"
+													ng-model="fieldsVM.selectedField.id"
+													disabled>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Field Label:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control"
+													ng-model="fieldsVM.selectedField.fieldLabel"
+													ng-change="fieldsVM.valueChanged()">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Path:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control"
+													ng-model="fieldsVM.selectedField.path"
+													disabled>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Widget:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control"
+													ng-model="fieldsVM.selectedField.widget"
+													ng-change="fieldsVM.valueChanged()">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Visibility Mode:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control"
+													ng-model="fieldsVM.selectedField.visibilityMode"
+													ng-change="fieldsVM.valueChanged()">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Default Value:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control"
+													ng-model="fieldsVM.selectedField.defaultValue"
+													ng-change="fieldsVM.valueChanged()">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-6 gutter-top-20">
+									<div class="form-group">
+										<label>Visibility Condition:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<textarea rows="6" class="form-control"
+													ng-model="fieldsVM.selectedField.visibilityCondition"
+													ng-change="fieldsVM.valueChanged()"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Help Text:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<textarea rows="6" class="form-control"
+													ng-model="fieldsVM.selectedField.helpText"
+													ng-change="fieldsVM.valueChanged()"></textarea>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label>Hint Text:</label>
+										<div class="row">
+											<div class="col-md-10">
+												<textarea rows="6" class="form-control"
+													ng-model="fieldsVM.selectedField.hintText"
+													ng-change="fieldsVM.valueChanged()"></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="panel panel-default schedule-panel gutter-top-20">
+						<div class="panel-heading">
+							<h4>
+								<span>Check Properties: </span>
+							</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="input-groups unique gutter-top-15">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.fixedValue"
+												bundle-name="manageFields" label="fixedValue"
+												ng-model="fieldsVM.selectedField.fixedValue"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.hideLabel"
+												bundle-name="manageFields" label="hideLabel"
+												ng-model="fieldsVM.selectedField.hideLabel"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.labelNewLine"
+												bundle-name="manageFields" label="labelNewLine"
+												ng-model="fieldsVM.selectedField.labelNewLine"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.answerNewLine"
+												bundle-name="manageFields" label="answerNewLine"
+												ng-model="fieldsVM.selectedField.answerNewLine"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.lineAbove"
+												bundle-name="manageFields" label="lineAbove"
+												ng-model="fieldsVM.selectedField.lineAbove"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-30">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.lineBelow"
+												bundle-name="manageFields" label="lineBelow"
+												ng-model="fieldsVM.selectedField.lineBelow"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.isMandatory"
+												bundle-name="manageFields" label="isMandatory"
+												ng-model="fieldsVM.selectedField.isMandatory"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.hasColumn"
+												bundle-name="manageFields" label="hasColumn"
+												ng-model="fieldsVM.selectedField.hasColumn"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.readOnly"
+												bundle-name="manageFields" label="readOnly"
+												ng-model="fieldsVM.selectedField.readOnly"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+									<div class="input-groups unique gutter-top-10">
+										<div class="checkbox">
+											<custom-check-box
+												is-checked="fieldsVM.selectedField.isHidden"
+												bundle-name="manageFields" label="isHidden"
+												ng-model="fieldsVM.selectedField.isHidden"
+												ng-change="fieldsVM.valueChanged()"> </custom-check-box>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-md-12">
+			<div class="row">
+				<br>
+				<br>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="footer_buttn">
+	<!-- footerPart -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-3"></div>
+			<div class="col-xs-8 col-md-6 text-left">
+				<button type="button" class="btn footer_btn" title="Exit"
+					ng-click="fieldsVM.exit()">
+					<span>Exit</span>
+				</button>
+				<button type="button" class="btn footer_btn" title="Save"
+					ng-click="fieldsVM.saveChanges()"
+					ng-disabled="!fieldsVM.isValueChanged">
+					<span>Save</span>
+				</button>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</div>

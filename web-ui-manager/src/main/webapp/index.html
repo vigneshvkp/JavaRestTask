@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Generator UI</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function() {
+		var activeRequest = false;
+		
+		generateXML = function(mode) {
+			if (activeRequest) {
+				return;
+			} else {
+				activeRequest = true;
+			}
+			
+			$("#divProgress").show();
+			$("#divStatus").text("Generating the XMLs");
+			$("#divStatus").show();
+			$("#divNext").hide();
+			
+			$.post("GeneratorServlet", {"mode": mode, "product": $("input[name=product]:checked").val()}, function(response) {
+				var responseText = "";
+
+				if(response == "true") {
+					responseText = "Done! XML generation/ FTP successful";
+				} else {
+					responseText = "Oops! Something has gone wrong";
+				}
+				
+				$("#divProgress").hide();
+				$("#divStatus").text(responseText);
+				$("#divNext").show();
+				
+				activeRequest = false;
+			});
+		}
+		
+		// invoke generation on button click
+		$("#btnGenXML").bind("click", function(event) {
+			event.preventDefault();
+			generateXML("GenerationFromMetaData");
+			return false;
+		});
+		
+		// invoke generation on button click
+		$("#btnGenXMLRefactored").bind("click", function(event) {
+			event.preventDefault();
+			generateXML("GenerationFromMetaDataRefactored");
+			return false;
+		});
+		
+		// invoke FTP on button click
+		$("#btnFTPXML").bind("click", function(event) {
+			event.preventDefault();
+			generateXML("SFTP");
+			return false;
+		});
+	});
+</script>
+</head>
+<body>
+	<div>
+		<br/>
+		<br/>
+		<br/>
+	</div>
+	<div class="row">
+		<div class="jumbotron container text-center" style="background-color:#d1ecf1">
+			<h1 class="display-2">XML Generation Utility</h1>
+			<hr/>
+			<div class="form-check form-check-inline">
+				<label class="form-check-label"><input class="form-check-input" type="radio" name="product" id="product1" value="CoreProdDev"> CoreProdDev </label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="form-check-label"><input class="form-check-input" type="radio" name="product" id="product2" value="DLGTRCT"> DLGTRCT </label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="form-check-label"><input class="form-check-input" type="radio" name="product" id="product3" value="LGDrop2"> LGDrop2 </label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="form-check-label"><input class="form-check-input" type="radio" name="product" id="product4" value="Sales"> Sales </label>
+			</div>
+			<br/>
+			<button type="button" class="btn btn-outline-primary btn-lg col-lg-3" id="btnGenXML">Generate XML</button>
+			<button type="button" class="btn btn-outline-primary btn-lg col-lg-3" id="btnGenXMLRefactored">Generate Refactored XML</button>
+			<button type="button" class="btn btn-outline-primary btn-lg col-lg-3" id="btnFTPXML">FTP XML</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container">
+			<div class="collapse" id="divProgress">
+				<div class="progress">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-info"
+						role="progressbar" aria-valuemin="0" aria-valuemax="100"
+						style="width: 100%" aria-valuenow="100">
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div id="divStatus" class="alert alert-info text-center collapse" role="alert"></div>
+			<br/>
+			<div id="divNext" class="collapse text-center">
+				<a href="#">Continue</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

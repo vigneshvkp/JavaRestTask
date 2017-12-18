@@ -1,0 +1,52 @@
+<section class="login_screen" ng-cloak>	
+<div class="container">
+	<div class="content">
+		<div class="title">
+			<h1><span>Welcome {{dgAppVm.principalName}}</span></h1>
+			<h3><span>Please choose one of the below Menu options</span></h3>
+		</div>
+
+		<div class="row gutter-top-70">
+			<div class="col-lg-2 col-md-4 col-sm-6" ng-repeat="menu in dgAppVm.appMenu">
+				<div class="test">
+					<!-- <div class="card" ng-mouseenter = "composerAppVm.flip()" > -->
+						<div class="box-front">
+							<div class="inner">
+								<p ng-bind="menu.name">{{menu.name}}</p>
+							</div>
+						</div>
+						<div class="box-back">
+							<div class="inner">
+								<!-- <div class="close">
+									<i class="close_icon"></i>
+								</div> -->
+								<h3 ng-bind="menu.name">{{menu.name}}</h3>
+
+								<div class="check_box_button">
+									<div class="input-groups">
+										<div class="row zero-space">
+											<div class="col-md-4 col-xs-4">
+												<div class="radio radio-info radio-inline">
+													<a tabindex="-1" ui-sref ="{{menu.urlLocation}}" ><input type="radio" name="radioInline" value="option1"
+														id="Alias"> <label for="Intermediary9"> </label></a>
+												</div>
+											</div>
+											<div class="col-md-8 col-xs-8">
+												<label class="gutter-top-7" > <a tabindex="-1" ui-sref ="{{menu.urlLocation}}">
+													{{menu.name}} </a></label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!-- </div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</section>
+	
+

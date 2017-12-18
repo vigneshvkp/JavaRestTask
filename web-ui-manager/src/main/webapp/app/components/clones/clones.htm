@@ -1,0 +1,87 @@
+<div class="show_menu"></div>
+<form name="cloneForm">
+<div class="main_content" ng-init="clonesVm.initProcess()">
+	<div class="main_head main_head_spacing bottom_spacing">
+		<div class="row">
+			<div class="col-md-12 col-xs-12">
+				<h2 class = "multi_line_text_table_800" style = "display: inline-block;" ><span title="Clones" >Product Clones</span></h2>
+				<h4  class = "pipeTitle"><span title="Create New Clone">Clone a product</span></h4>
+			</div>
+		</div>
+		
+		<!-- Product Panel -->
+	<div class="panel panel-default gutter-top-20">
+		<div class="panel-heading">
+			<div class="row">
+				<div class="col-xs-12">
+					<h4>
+						<span data-i18n-text="{bundle: 'manageProducts', key: 'clone_product_header_title'}"></span>
+					</h4>
+				</div>
+			</div>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-6 ">
+					<label><span data-i18n-text="{bundle: 'manageProducts', key: 'clone_code_label'}"></span>
+						<span class="mandatory">*</span></label>
+					<div class="input-groups">
+						<custom-input-box name="cloneCode"
+							ng-model="clonesVm.modelObject.cloneCode"
+							is-required="true" change-method="clonesVm.contentChanged('cloneCode')"
+							error="clonesVm.errorNotification.cloneCode"
+							allow-clear="true"></custom-input-box>
+					</div>
+				</div>
+				<div class="col-md-6 ">
+					<label><span data-i18n-text="{bundle: 'manageProducts', key: 'clone_name_label'}"></span>
+						<span class="mandatory">*</span></label>
+					<div class="input-groups">
+						<custom-input-box name="cloneName"
+							ng-model="clonesVm.modelObject.cloneName"
+							is-required="true" change-method="clonesVm.contentChanged('cloneName')"
+							error="clonesVm.errorNotification.cloneName"
+							allow-clear="true"></custom-input-box>
+					</div>
+				</div>
+			</div>
+
+			<div class="row gutter-top-20">
+				<div class="col-md-6">
+					<div class="input-groups">
+						<label><span data-i18n-text="{bundle: 'manageProducts', key: 'clone_description_label'}"></span>
+							<span class="mandatory">*</span></label>
+
+						<custom-input-box
+							ng-model="clonesVm.modelObject.cloneDescription"
+							is-required="true" change-method="clonesVm.contentChanged('cloneDescription')"
+							error="clonesVm.errorNotification.cloneDescription"
+							allow-clear="true"></custom-input-box>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="input-groups">
+						<label><span data-i18n-text="{bundle: 'manageProducts', key: 'clone_reason_label'}"></span></label>
+						<custom-input-box
+							ng-model="clonesVm.modelObject.cloneReason"
+							allow-clear="true"></custom-input-box>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="footer_buttn">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4"></div>
+			<div class="col-xs-12 col-md-4 text-center">
+				<button type="button" class="btn footer_btn" ng-click="clonesVm.cancel()" data-i18n-tool-tip="{'title' :{bundle: 'common', key: 'cancel_tool_tip'}}"><span data-i18n-text="{bundle: 'common', key: 'cancel_button_label'}"/></button>
+				<button type="button" ng-click="clonesVm.saveClone(cloneForm)" class="btn footer_btn" data-i18n-tool-tip="{'title' :{bundle: 'common', key: 'save_tool_tip'}}"><span data-i18n-text="{bundle: 'common', key: 'save_button_label'}"/></button>
+			</div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+</div>
+</form>

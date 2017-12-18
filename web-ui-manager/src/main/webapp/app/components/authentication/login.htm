@@ -1,0 +1,41 @@
+<section class="login_screen">
+	<form name="loginForm" ng-enter="loginVm.login(loginForm)">
+		<div class="contain">
+			<div class="row">
+				<div class="col-xs-12 screen_hgt">
+					<div class="form-width">
+						<div class="title">
+							<h1><span>Login</span>
+							</h1>
+						</div>
+						<div class="form-group gutter-top-40">
+							<div class="icon-addon addon-lg">
+								<custom-input-box name="username" ng-model="loginVm.credentials.username"
+									is-required="true" place-holder-name="Username" change-method="loginVm.contentChanged('username')"
+									error="loginVm.notifications.username"></custom-input-box>
+								<label for="email" class="glyphicon"><img
+									src="assets/img/icon_user.png"></label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="icon-addon addon-lg">
+								<custom-input-box name="password" ng-model="loginVm.credentials.password"
+									is-required="true" place-holder-name="Password" 
+									field-type='password' change-method="loginVm.contentChanged('password')"
+									error="loginVm.notifications.password"></custom-input-box>
+								<label for="email" class="glyphicon"><img
+									src="assets/img/icon_lock.png"></label>
+							</div>
+						</div>
+						<div class="reg_btn gutter-top-25">
+							<button ng-click="loginVm.login(loginForm)" type="button" data-i18n-tool-tip="{'title' : {bundle: 'login', key: 'login_label'}}"
+								class="btn btn-default">
+								<span>Login</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</section>

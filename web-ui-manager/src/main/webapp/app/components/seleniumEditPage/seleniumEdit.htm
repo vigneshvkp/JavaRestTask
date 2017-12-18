@@ -1,0 +1,121 @@
+<main role="main">
+<div class="main_content products_page bottom_spacing">
+	<div class="row search_box_filter"></div>
+	<div class="main_head gutter-top-10 bottom_spacing">
+		<div class="row">
+			<div class="col-md-6 col-xs-8">
+				<h3>
+					<span>Manage Selenium Fields</span>
+				</h3>
+			</div>
+		</div>
+		<hr>
+		<div class="panel panel-default gutter-top-30"
+			ng-repeat="screen in seleniumEditVM.fetchedFields.Screen track by $index">
+			<div class="panel-body zero_spacing">
+				<div class="panel-heading border-none">
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="versions-content">
+								<div class="col-md-12" style="display: block;">
+									<span
+										class="nav-toggle-icon glyphicon tree_right_icon icon-float" ng-click="seleniumEditVM.toggleAction($index, $event)"></span>
+									<h3 style="float: left;" ng-if="screen.id != 'null'">
+										<span ng-bind="screen.id"></span>
+									</h3>
+									<h3 style="float: left;" ng-if="screen.id == null">
+										<span>No ID for this Screen</span>
+									</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="screen-definition-table">
+					<table datatable="ng" class="table table-condensed hover table-striped dataTable"
+						ng-show="seleniumEditVM.showTable[$index]"
+						dt-options="seleniumEditVM.dtOptions" dt-column-defs="seleniumEditVM.dtColumnDefs">
+						<thead class="custom-table-header">
+							<tr>
+								<th class="no-sort sb-width-col5"><span>Field Label</span></th>
+								<th class="no-sort sb-width-col5"><span>Field Type</span></th>
+								<th class="no-sort sb-width-col5"><span>input</span></th>
+								<th class="no-sort multi_line_text_table sb-width-col5"><span>Path</span></th>
+								<th class="no-sort sb-width-col5"><span>Is Clicked</span></th>
+								<th class="no-sort sb-width-col5"></th>
+								<th class="sb-width-col5"><span>Action</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr style="height: 65px;" ng-repeat="field in screen.Field track by $index" ng-init="field.hide=false"
+								ng-class="{'slideOutLeft':field.hide,'animated':field.hide}">
+								<td ng-if="!field.hide" class="multi_line_text_table" title="{{field.fieldLabel}}" ng-bind="field.fieldLabel"></td>
+								<td ng-if="!field.hide" ng-bind="field.type"></td>
+								<td ng-if="!field.hide" ng-bind="field.input"></td>
+								<td ng-if="!field.hide">
+									<input type="text"
+									class="form-control" ng-model="field.path" disabled></td>
+								<td ng-if="!field.hide">
+									<custom-check-box ng-if="(field.isChecked == true || field.isChecked)" ng-model="field.isChecked"
+										is-checked="field.isChecked" bundle-name="manageProducts" label="isClicked" isReadOnly=true> </custom-check-box>
+								</td>
+								<td ng-if="!field.hide"></td>
+								<td ng-if="!field.hide" class="view_1"><span
+									ng-show="field.fieldLabel"> <i
+										data-i18n-tool-tip="{'title' :{bundle: 'common', key: 'animate_action'}}"
+										ng-click="seleniumEditVM.flipOtherRows($index, screen)"
+										class="arrowright_icon"></i></span>
+								</td>
+								<td class="select-conventer overlay-row-sd" ng-if="field.hide" ng-bind="field.fieldLabel"></td>
+								<td class="select-conventer overlay-row-sd btn-nowrap" ng-if="field.hide">
+									<input type="text"
+									class="form-control" ng-model="field.type"></td>
+								<td class="select-conventer overlay-row-sd btn-nowrap" ng-if="field.hide"
+									style="padding-right: 0px !important;"><input type="text"
+									class="form-control" ng-model="field.input" ng-disabled="field.type=='button'"></td>
+								<td class="select-conventer view_1 overlay-row-sd" ng-if="field.hide">
+									<input type="text"
+									class="form-control" ng-model="field.path" disabled></td>
+								<td class="select-conventer view_1 overlay-row-sd" ng-if="field.hide">
+									<custom-check-box ng-show="(field.isChecked == true || field.isChecked)" ng-model="field.isChecked"
+										is-checked="field.isChecked" bundle-name="manageProducts"
+										label="isClicked"> </custom-check-box></td>
+								<td class="select-conventer view_1 overlay-row-sd" ng-if="field.hide">
+									<button type="button" ui-sref="seleniumField"
+											class="btn property-btn" title="Manage Selenium Field"
+											ng-click="passSeleniumField(screen, panel, field)">
+											<i class="edit_icon"></i> <span>Manage Selenium Field</span>
+										</button> 
+								</td>
+								<td class="select-conventer text-right view_1 overlay-row-sd" ng-if="field.hide">
+										<i class="close_icon" ng-click="seleniumEditVM.closeAction($index, field)"
+												data-i18n-tool-tip="{'title' : {bundle: 'common', key: 'close_button_label'}}"></i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+</main>
+<div class="footer_buttn">
+	<!-- footerPart -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-3"></div>
+			<div class="col-xs-8 col-md-6 text-left">
+				<button type="button" class="btn footer_btn" title="Exit"
+					ng-click="seleniumEditVM.exit()">
+					<span>Exit</span>
+				</button>
+				<button type="button" class="btn footer_btn" title="Save"
+					ng-click="seleniumEditVM.saveChanges()">
+					<span>Save</span>
+				</button>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+</div>

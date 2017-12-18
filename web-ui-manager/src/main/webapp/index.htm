@@ -1,0 +1,157 @@
+	<!DOCTYPE html>
+	<html lang="en" ng-app="WebUIManagerApp" ng-cloak ng-controller="DgAppController as dgAppVm">
+	<head>
+	<title>Dynamic Generation- Web UI Manager</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=10">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- BEGIN STYLESHEETS -->
+	<link type="text/css" rel="stylesheet" href="assets/css/reset.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/bootstrap.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/font-awesome.min.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/awesome-bootstrap-checkbox.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/dev.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/responsive.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/lib/select2.min.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/lib/select2.min.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/lib/animate.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/lib/dataTables.bootstrap.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/tinyscrollbar.css" />
+	<link type="text/css" rel="stylesheet" href="assets/css/jquery.mCustomScrollbar.css" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<!-- END STYLESHEETS -->
+	
+	<script src="assets/js/lib/less.min.js" type="text/javascript"></script>
+	
+	<!-- js lib files -->
+	<script type="text/javascript" src="assets/js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jsonpath-0.8.0.js"></script>
+	<script type="text/javascript" src="assets/js/lib/bootstrap.js"></script>
+	<script type="text/javascript" src="assets/js/lib/select2.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.iframe-transport.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.dataTables.columnFilter.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.fileupload-process.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.fileupload-angular.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.dataTables.grouping.js"></script>
+	<script type="text/javascript" src="assets/js/lib/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="assets/js/lib/dataTables.responsive.js"></script>
+	<script type="text/javascript" src="assets/js/lib/xml2json.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/moment.js"></script>
+	<script type="text/javascript" src="assets/js/lib/moment-range-min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/jquery.tinyscrollbar.js"></script>
+	
+	<!-- angularjs files -->
+	<script type="text/javascript" src="assets/js/angularjs/angular-ui-route.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/ct-ui-router-extras.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/ui-bootstrap-tpls.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/angular-datatables.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/angular-datatables.columnfilter.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/angular-xml.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/angular-cache.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/textAngular-rangy.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/textAngular-sanitize.min.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/textAngular.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/textAngularSetup.js"></script>
+	<script type="text/javascript" src="assets/js/angularjs/angular-animate.js"></script>
+	<script type="text/javascript" src="assets/js/lib/multiselect.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/xpathjs.min.js"></script>
+
+	<script type="text/javascript" src="app/app.js"></script>
+	</head>
+	<body ng-class="{'home_page': dgAppVm.currentState == 'home' || dgAppVm.currentState == 'login'}">
+		<!-- Div for Header-->
+		<section class="sect navbar-fixed-top">
+			<div class="contain">
+				<div class="row profile">
+					<div class="col-xs-6 gutter-top-15">
+						<img src="assets/img/Logo_1.png">
+						<h3>Web UI Manager</h3>
+					</div><span ng-bind="$state.is('login')"></span>
+						<div ng-if="!dgAppVm.isLoggedIn" class="col-xs-6 text-right gutter-top-15 profile_img">
+							<ul>
+								<li><img src="assets/img/user.png"
+									class="img-rounded gutter-top-5"
+									style="height: 27px; width: 42px"></li>
+								<li class="gutter-top-10">{{dgAppVm.principalName}}</li>
+								<span class="span"></span>
+								<li class="gutter-top-10"><a class="disable_toolTip" href=""
+									ng-click="dgAppVm.logout()"><span>Logout</span></a></li>
+							</ul>
+						</div>
+				</div>
+			</div>
+		</section>
+		<div class="col-xs-2"></div>
+			<div class="col-xs-8">
+		<div class="widgets-notifications"></div>
+		</div>
+		<div class="col-xs-2"></div>
+		<!-- Div for page loader -->
+		<div class="bread_fixed" ng-if="dgAppVm.showBreadCrum">
+			<div class="show_menu navbar-fixed-top">
+				<div class="main_content TC_search">
+					<div class="widgets-breadcrumb"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="height: 100%" ui-view autoscroll="true"></div>
+		
+		<!-- Div for page loader -->
+		<div id="preloader-container" ng-show="dgAppVm.showPageLoader">
+			<div class="pre-loader"></div>
+		</div>
+		
+		<!-- Div for footer -->
+		<div class="navbar-fixed-bottom footer">
+			<div class="foot">
+				<img style="width: 33px; height: 19px" src="assets/img/u35.png">
+				<span class="gutter-top-3">@ Copyright SSP Limited</span>
+			</div>
+		</div>
+		<script type="text/javascript" src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.floatThead.js"></script>
+		<script type="text/javascript" src="assets/js/common.js"></script>
+		<script type="text/javascript" src="assets/js/lib/jquery.phancy.js"></script>
+		<script type="text/javascript" src="assets/js/lib/i18nCustomDirective.js"></script>
+	
+		<!-- Directives  -->
+    	<script type="text/javascript" src="app/shared/common/directives/customInputBox.js"></script>
+		<script type="text/javascript" src="app/shared/common/directives/customCheckBox.js"></script>
+		<script type="text/javascript" src="app/shared/common/directives/customDropDown.js"></script>
+		<script type="text/javascript" src="app/shared/common/directives/customDatePicker.js"></script>
+		<script type="text/javascript" src="app/shared/common/directives/customRadioButton.js"></script>
+		<script type="text/javascript" src="app/shared/common/directives/breadcrumb.js"></script>
+	
+		<script type="text/javascript" src="app/dgAppController.js"></script>
+		<!-- Constants -->
+		<script type="text/javascript" src="app/shared/common/constants/appConstants.js"></script>
+		<script type="text/javascript" src="app/shared/common/constants/urlConstants.js"></script>
+	
+		<!-- Services  -->
+		<script type="text/javascript" src="app/shared/common/services/network.js"></script>
+		<script type="text/javascript" src="app/shared/common/services/utilities.js"></script>
+		<script type="text/javascript" src="app/shared/common/services/dataService.js"></script>
+			<script type="text/javascript" src="app/shared/common/services/errorService.js"></script>
+	
+		<!-- Components controller and services -->
+		<script type="text/javascript" src="app/components/authentication/loginController.js"></script>
+		<script type="text/javascript" ng-src="{{'app/components/products/productsController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/products/productsService.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/variants/variantController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/clones/clonesController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/NativeUIGenerator/nativeUIGeneratorController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/screens/screensController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/fields/fieldsController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/manageScreens/manageScreensController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/seleniumEditPage/seleniumEditController.js?version='+dgAppVm.buildNumber}}"></script>
+		<script type="text/javascript" ng-src="{{'app/components/SeleniumField/seleniumFieldController.js?version='+dgAppVm.buildNumber}}"></script>
+	</body>
+	</html>
